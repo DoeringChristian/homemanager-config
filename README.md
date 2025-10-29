@@ -1,15 +1,18 @@
 # Home Manager Configuration for Ubuntu
 
-This repository contains a Home Manager configuration for managing user environment on Ubuntu systems using Nix.
+This repository contains a Home Manager configuration for managing user
+environment on Ubuntu systems using Nix.
 
 ## Prerequisites
 
 1. Install Nix on Ubuntu:
+
 ```bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
 
 2. Enable flakes (add to `~/.config/nix/nix.conf` or `/etc/nix/nix.conf`):
+
 ```
 experimental-features = nix-command flakes
 ```
@@ -17,6 +20,7 @@ experimental-features = nix-command flakes
 ## Installation
 
 1. Clone this repository:
+
 ```bash
 git clone <repository-url> ~/homemanager
 cd ~/homemanager
@@ -28,6 +32,7 @@ cd ~/homemanager
    - Add or remove packages as needed
 
 3. Build and activate the configuration:
+
 ```bash
 nix run home-manager/master -- switch --flake .#doeringc
 ```
@@ -49,6 +54,7 @@ After installation, you can:
 ## Customization
 
 The configuration includes:
+
 - Development tools (git, vim, neovim, tmux)
 - Programming languages (Python, Node.js, GCC)
 - Modern CLI tools (ripgrep, fzf, bat, eza, starship)
@@ -56,3 +62,4 @@ The configuration includes:
 - Git configuration with sensible defaults
 
 Add more packages by editing the `home.packages` list in `home.nix`.
+
