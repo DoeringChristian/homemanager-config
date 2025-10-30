@@ -16,12 +16,15 @@
       url = "github:nix-community/nixGL/pull/187/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = {
     nixpkgs,
     home-manager,
     nixgl,
+    catppuccin,
     ...
   }: let
     system = "x86_64-linux";
@@ -34,7 +37,10 @@
       inherit pkgs;
 
       # Specify your home configuration modules here
-      modules = [./home.nix];
+      modules = [
+        ./home.nix
+        catppuccin.homeModules.catppuccin
+      ];
 
       # Pass nixGL to home.nix
       extraSpecialArgs = {

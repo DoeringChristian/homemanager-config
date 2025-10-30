@@ -59,10 +59,6 @@
     duf
 
     # Terminal utilities
-    bat
-    eza
-    starship
-    direnv
     (config.lib.nixGL.wrap kitty)
     (config.lib.nixGL.wrap tev)
 
@@ -92,19 +88,107 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+  home.shell = {
+    enableFishIntegration = true;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.starship = {
     enable = true;
-    enableFishIntegration = true;
+    settings = {
+      direnv = {
+        disabled = false;
+      };
+    };
   };
-  #
   programs.direnv = {
     enable = true;
-    enableFishIntegration = true;
+    # enableFishIntegration = true;
     nix-direnv.enable = true;
+  };
+  programs.eza = {
+    enable = true;
+    git = true;
+  };
+  programs.bat = {
+    enable = true;
+  };
+  programs.btop = {
+    enable = true;
+  };
+  # programs.atuin = {
+  #   enable = true;
+  #   settings = {
+  #     keymap_mode = "vim-insert";
+  #   };
+  # };
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+  programs.fish = {
+    enable = true;
+    generateCompletions = true;
+    shellInit = ''
+      set -gx fish_key_bindings fish_user_key_bindings
+    '';
+    interactiveShellInit = ''
+      set -gx fish_key_bindings fish_user_key_bindings
+    '';
+    functions = {
+      fish_user_key_bindings = {
+        body = ''
+          fish_vi_key_bindings
+
+          # Emulates vim's cursor shape behavior
+          # Set the normal and visual mode cursors to a block
+          set fish_cursor_default block
+          # Set the insert mode cursor to a line
+          set fish_cursor_insert line
+          # Set the replace mode cursor to an underscore
+          set fish_cursor_replace_one underscore
+          # The following variable can be used to configure cursor shape in
+          # visual mode, but due to fish_cursor_default, is redundant here
+          set fish_cursor_visual block
+
+          # Set timeout
+          set -g fish_sequence_key_delay_ms 200
+
+          # Mapping for jk to escape
+          bind --mode insert --sets-mode default jk cancel repaint-mode
+          # Mapping for jj to j
+          bind -M insert jj 'commandline -i j'
+
+          #Mapping for clipboard in vim mode
+          bind yy fish_clipboard_copy
+          bind Y fish_clipboard_copy
+          bind p fish_clipboard_paste
+
+          # Accept auto suggestions with `l`
+          bind -M default l accept-autosuggestion
+        '';
+      };
+      tb.body = "tensorboard $argv --samples_per_plugin images=1000000";
+      "...".body = "../..";
+      "....".body = "../../..";
+    };
+    shellAliases = {
+      l = "eza -l -g --icons";
+      ll = "l -a";
+      la = "ll";
+      jn = "jupyter notebook";
+      jt = "jupytext --update --to notebook";
+      je = "jupyter execute";
+      cookie = "cookiecutter my --directory";
+      jpg2webm = "ffmpeg -r 30 -i %d.jpg output.webmm";
+    };
+  };
+
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
   };
   #
   # programs.fzf = {
