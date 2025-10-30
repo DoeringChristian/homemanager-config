@@ -20,8 +20,8 @@
 
   nixGL.packages = nixgl.packages;
   nixGL.defaultWrapper = "mesa";
-  # nixGL.offloadWrapper = "nvidiaPrime";
-  nixGL.installScripts = ["mesa"];
+  nixGL.offloadWrapper = "nvidiaPrime";
+  nixGL.installScripts = ["mesa" "nvidia" "nvidiaPrime"];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -63,7 +63,8 @@
     eza
     starship
     direnv
-    (config.lib.nixGL.wrapOffload kitty)
+    (config.lib.nixGL.wrap kitty)
+    (config.lib.nixGL.wrap tev)
 
     # Network tools
     net-tools

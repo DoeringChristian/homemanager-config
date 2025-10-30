@@ -11,9 +11,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NixGL
+    # NixGL - using PR #187 with nvidia version detection fix
     nixgl = {
-      url = "github:guibou/nixGL";
+      url = "github:nix-community/nixGL/pull/187/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

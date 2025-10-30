@@ -34,7 +34,7 @@ cd ~/homemanager
 3. Build and activate the configuration:
 
 ```bash
-nix run home-manager/master -- switch --flake .#doeringc
+nix run home-manager/master -- switch --impure --flake .#doeringc
 ```
 
 ## Usage
@@ -62,4 +62,3 @@ The configuration includes:
 - Git configuration with sensible defaults
 
 Add more packages by editing the `home.packages` list in `home.nix`.
-
