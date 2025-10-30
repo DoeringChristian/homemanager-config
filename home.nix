@@ -134,12 +134,15 @@
       vim_keys = true;
     };
   };
-  # programs.atuin = {
-  #   enable = true;
-  #   settings = {
-  #     keymap_mode = "vim-insert";
-  #   };
-  # };
+  programs.claude-code = {
+    enable = true;
+  };
+  programs.atuin = {
+    enable = true;
+    settings = {
+      keymap_mode = "vim-insert";
+    };
+  };
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
