@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+
+nix run home-manager/master -- switch --impure --flake .#doeringc
