@@ -86,7 +86,10 @@
 
   # XDG configuration files
   xdg.configFile = {
-    "fish/completions/docker.fish".source = ./.config/fish/completions/docker.fish;
+    "fish/completions" = {
+      source = ./.config/fish/completions;
+      recursive = true;
+    };
   };
 
   # Environment variables
