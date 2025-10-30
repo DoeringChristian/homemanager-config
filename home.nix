@@ -84,6 +84,11 @@
     # '';
   };
 
+  # XDG configuration files
+  xdg.configFile = {
+    "fish/completions/docker.fish".source = ./.config/fish/completions/docker.fish;
+  };
+
   # Environment variables
   home.sessionVariables = {
     EDITOR = "nvim";
