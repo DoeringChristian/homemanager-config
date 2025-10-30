@@ -2,12 +2,26 @@
   config,
   pkgs,
   lib,
+  nixgl,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "doeringc";
   home.homeDirectory = "/home/doeringc";
+
+  # allow unfree packages
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
+  };
+
+  nixGL.packages = nixgl.packages;
+  nixGL.defaultWrapper = "mesa";
+  # nixGL.offloadWrapper = "nvidiaPrime";
+  nixGL.installScripts = ["mesa"];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -31,26 +45,10 @@
     curl
     wget
 
-    # Build tools
-    gcc
-    gnumake
-    cmake
-    pkg-config
-
-    # Python
-    python3
-    python3Packages.pip
-    python3Packages.virtualenv
-
-    # Node.js
-    nodejs
-    nodePackages.npm
-
     # Utilities
     unzip
     zip
     gzip
-    tar
     which
     file
     less
@@ -65,6 +63,7 @@
     eza
     starship
     direnv
+    (config.lib.nixGL.wrapOffload kitty)
 
     # Network tools
     net-tools
@@ -90,79 +89,41 @@
 
   # Environment variables
   home.sessionVariables = {
-    EDITOR = "vim";
+    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # Enable and configure programs
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-    bashrcExtra = ''
-      # Custom aliases
-      alias ll='ls -la'
-      alias la='ls -A'
-      alias l='ls -CF'
-      alias ..='cd ..'
-      alias ...='cd ../..'
-
-      # Git aliases
-      alias gs='git status'
-      alias ga='git add'
-      alias gc='git commit'
-      alias gp='git push'
-      alias gl='git log --oneline --graph'
-
-      # Safety aliases
-      alias rm='rm -i'
-      alias cp='cp -i'
-      alias mv='mv -i'
-    '';
-  };
-
-  programs.git = {
-    enable = true;
-    userName = "Your Name"; # Replace with your name
-    userEmail = "your.email@example.com"; # Replace with your email
-    extraConfig = {
-      init.defaultBranch = "main";
-      pull.rebase = true;
-      push.autoSetupRemote = true;
-    };
-  };
-
   programs.starship = {
     enable = true;
-    enableBashIntegration = true;
+    enableFishIntegration = true;
   };
-
+  #
   programs.direnv = {
     enable = true;
-    enableBashIntegration = true;
+    enableFishIntegration = true;
     nix-direnv.enable = true;
   };
-
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-  };
-
-  programs.bat = {
-    enable = true;
-    config = {
-      theme = "TwoDark";
-      number = true;
-    };
-  };
-
-  programs.eza = {
-    enable = true;
-    enableBashIntegration = true;
-  };
-
-  # Ubuntu-specific: fontconfig for better font rendering
-  fonts.fontconfig.enable = true;
+  #
+  # programs.fzf = {
+  #   enable = true;
+  #   enableBashIntegration = true;
+  # };
+  #
+  # programs.bat = {
+  #   enable = true;
+  #   config = {
+  #     theme = "TwoDark";
+  #     number = true;
+  #   };
+  # };
+  #
+  # programs.eza = {
+  #   enable = true;
+  #   enableBashIntegration = true;
+  # };
+  #
+  # # Ubuntu-specific: fontconfig for better font rendering
+  # fonts.fontconfig.enable = true;
 }
-

@@ -10,15 +10,25 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # NixGL
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     nixpkgs,
     home-manager,
+    nixgl,
     ...
   }: let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [nixgl.overlay];
+    };
   in {
     homeConfigurations."doeringc" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -26,8 +36,10 @@
       # Specify your home configuration modules here
       modules = [./home.nix];
 
-      # Optionally use extraSpecialArgs
-      # to pass through arguments to home.nix
+      # Pass nixGL to home.nix
+      extraSpecialArgs = {
+        nixgl = nixgl;
+      };
     };
   };
 }
