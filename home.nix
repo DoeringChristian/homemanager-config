@@ -93,6 +93,11 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
+  # Add custom paths
+  home.sessionPath = [
+    "$HOME/.pixi/bin"
+  ];
   home.shell = {
     enableFishIntegration = true;
   };
