@@ -240,6 +240,9 @@
       pull = {
         ff = "only";
       };
+      merge = {
+        ff = "only";
+      };
     };
   };
   #
