@@ -210,10 +210,38 @@
     flavor = "mocha";
   };
   #
-  # programs.fzf = {
-  #   enable = true;
-  #   enableBashIntegration = true;
-  # };
+  programs.fzf = {
+    enable = true;
+  };
+  programs.gh = {
+    enable = true;
+  };
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+    settings = {
+      core = {
+        editor = "nvim";
+      };
+      user = {
+        name = "Christian Döring";
+        email = "christian.doering@tum.de";
+      };
+      credential = {
+        helper = "store";
+      };
+      alias = {
+        lg = "log --decorate --graph --abbrev-commit";
+        adog = "log --all --decorate --oneline --graph --abbrev-commit";
+        adogs = "log --all --decorate --oneline --graph --abbrev-commit --stat";
+        dog = "log --decorate --oneline --graph --abbrev-commit";
+        dogs = "log --decorate --oneline --graph --abbrev-commit --stat";
+      };
+      pull = {
+        ff = "only";
+      };
+    };
+  };
   #
   # programs.bat = {
   #   enable = true;
