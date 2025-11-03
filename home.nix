@@ -69,6 +69,13 @@
 
     # Fonts
     nerd-fonts.fira-code
+
+    # Inkscape with TexText extension
+    (pkgs.inkscape-with-extensions.override {
+      inkscapeExtensions = [
+        pkgs.inkscape-extensions.textext
+      ];
+    })
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
