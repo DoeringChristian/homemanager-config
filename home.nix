@@ -59,7 +59,6 @@
     duf
 
     # Terminal utilities
-    (config.lib.nixGL.wrap kitty)
     (config.lib.nixGL.wrap tev)
 
     # Network tools
@@ -210,7 +209,7 @@
 
   catppuccin = {
     enable = true;
-    flavor = "mocha";
+    flavor = "macchiato";
   };
   #
   programs.fzf = {
@@ -247,6 +246,58 @@
         ff = "only";
       };
     };
+  };
+  programs.kitty = {
+    enable = true;
+    package = config.lib.nixGL.wrap pkgs.kitty;
+    enableGitIntegration = true;
+    shellIntegration.enableFishIntegration = true;
+    font = {
+      name = "FiraCode Nerd Font";
+      package = pkgs.nerd-fonts.fira-code;
+    };
+    settings = {
+      "tab_bar_min_tabs" = "1";
+      "tab_bar_edge" = "bottom";
+      "tab_bar_style" = "powerline";
+      "tab_powerline_style" = "slanted";
+      "tab_title_template" = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
+      "update_check_interval" = 0;
+      "wayland_titlebar_color" = "background";
+      "shell" = "fish";
+      "kitty_mod" = "Alt";
+    };
+    keybindings = {
+      "Alt+equal" = "change_font_size all +1.0";
+      "Alt+plus" = "change_font_size all +1.0";
+      "Alt+minus" = "change_font_size all -1.0";
+
+      "kitty_mod+enter" = "launch --cwd=current";
+      "kitty_mod+x" = "close_window";
+
+      "kitty_mod+h" = "neighboring_window left";
+      "kitty_mod+j" = "neighboring_window down";
+      "kitty_mod+k" = "neighboring_window up";
+      "kitty_mod+l" = "neighboring_window right";
+
+      "kitty_mod+m" = "toggle_layout stack";
+      "kitty_mod+w" = "new_tab";
+      "kitty_mod+n" = "next_tab";
+      "kitty_mod+p" = "previous_tab";
+
+      "kitty_mod+e" = "kitty_scrollback_nvim";
+      "kitty_mod+u" = "show_scrollback";
+
+      "ctrl+shift+c" = "copy_to_clipboard";
+      "ctrl+shift+v" = "paste_from_clipboard";
+    };
+    extraConfig = ''
+      action_alias kitty_scrollback_nvim kitten ~/.local/share/nvim/lazy/kitty-scrollback.nvim/python/kitty_scrollback_nvim.py --nvim-args -u ~/.config/nvim/ksb.lua
+    '';
+  };
+
+  programs.zathura = {
+    enable = true;
   };
   # Ubuntu-specific: fontconfig for better font rendering
   fonts.fontconfig.enable = true;
