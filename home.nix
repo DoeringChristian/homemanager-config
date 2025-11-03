@@ -67,6 +67,9 @@
     inetutils
     nmap
     traceroute
+
+    # Fonts
+    nerd-fonts.fira-code
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -245,20 +248,6 @@
       };
     };
   };
-  #
-  # programs.bat = {
-  #   enable = true;
-  #   config = {
-  #     theme = "TwoDark";
-  #     number = true;
-  #   };
-  # };
-  #
-  # programs.eza = {
-  #   enable = true;
-  #   enableBashIntegration = true;
-  # };
-  #
-  # # Ubuntu-specific: fontconfig for better font rendering
-  # fonts.fontconfig.enable = true;
+  # Ubuntu-specific: fontconfig for better font rendering
+  fonts.fontconfig.enable = true;
 }
