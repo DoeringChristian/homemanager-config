@@ -272,6 +272,8 @@
       "update_check_interval" = 0;
       "wayland_titlebar_color" = "background";
       "shell" = "fish";
+      "allow_remote_control" = "yes";
+      "listen_on" = "unix:/tmp/kitty";
       "kitty_mod" = "Alt";
     };
     keybindings = {
