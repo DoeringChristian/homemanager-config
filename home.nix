@@ -95,8 +95,12 @@
 
   # XDG configuration files
   xdg.configFile = {
-    "fish/completions" = {
-      source = ./.config/fish/completions;
+    "fish" = {
+      source = ./.config/fish;
+      recursive = true;
+    };
+    "kitty" = {
+      source = ./.config/kitty;
       recursive = true;
     };
   };
@@ -275,6 +279,7 @@
       "allow_remote_control" = "yes";
       "listen_on" = "unix:/tmp/kitty";
       "kitty_mod" = "Alt";
+      "startup_session" = "startup.conf";
     };
     keybindings = {
       "Alt+equal" = "change_font_size all +1.0";
