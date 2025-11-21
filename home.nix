@@ -76,6 +76,8 @@
         pkgs.inkscape-extensions.textext
       ];
     })
+
+    (config.lib.nixGL.wrap darktable)
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
