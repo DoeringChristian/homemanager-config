@@ -3,6 +3,7 @@
   pkgs,
   lib,
   nixgl,
+  claudepod,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
@@ -44,6 +45,7 @@
     jq
     curl
     wget
+    claudepod.packages.${pkgs.system}.default
 
     # Utilities
     unzip

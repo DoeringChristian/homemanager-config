@@ -18,6 +18,11 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
+
+    claudepod = {
+      url = "github:doeringchristian/claudepod";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -25,6 +30,7 @@
     home-manager,
     nixgl,
     catppuccin,
+    claudepod,
     ...
   }: let
     system = "x86_64-linux";
@@ -42,9 +48,10 @@
         catppuccin.homeModules.catppuccin
       ];
 
-      # Pass nixGL to home.nix
+      # Pass nixGL and claudepod to home.nix
       extraSpecialArgs = {
         nixgl = nixgl;
+        claudepod = claudepod;
       };
     };
   };
