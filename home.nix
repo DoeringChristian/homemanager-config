@@ -225,6 +225,7 @@
   catppuccin = {
     enable = true;
     flavor = "macchiato";
+    zathura.enable = false;
   };
   #
   programs.fzf = {
